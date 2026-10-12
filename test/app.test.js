@@ -19,8 +19,12 @@ test('browser preflight OPTIONS requests are accepted without a 405', async () =
   const base = `http://127.0.0.1:${port}`;
 
   try {
-    const res = await fetch(`${base}/api/health`, { method: 'OPTIONS' });
-    assert.equal(res.status, 204);
+    const health = await fetch(`${base}/api/health`, { method: 'OPTIONS' });
+    const login = await fetch(`${base}/api/auth/login`, { method: 'OPTIONS' });
+    const signup = await fetch(`${base}/api/auth/signup`, { method: 'OPTIONS' });
+    assert.equal(health.status, 204);
+    assert.equal(login.status, 204);
+    assert.equal(signup.status, 204);
   } finally {
     await new Promise((resolve, reject) => server.close((err) => (err ? reject(err) : resolve())));
   }
