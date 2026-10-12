@@ -90,7 +90,12 @@ function createApp({
 
   function json(response, status, payload, extraHeaders = {}) {
     const body = JSON.stringify(payload);
+    const allowOrigin = response._requestOrigin || '*';
     response.writeHead(status, {
+      'Access-Control-Allow-Origin': allowOrigin,
+      'Access-Control-Allow-Credentials': allowOrigin !== '*' ? 'true' : 'false',
+      'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
       'Cache-Control': 'no-store',
       'Content-Length': Buffer.byteLength(body),
       'Content-Type': 'application/json; charset=utf-8',
@@ -167,7 +172,10 @@ function createApp({
     const origin = request.headers.origin;
     if (!origin) return true;
     try {
-      return new URL(origin).host === request.headers.host;
+      const originHost = new URL(origin).host;
+      const host = request.headers.host || '';
+      const allowed = new Set(['localhost:3000', '127.0.0.1:3000', 'h2eni.github.io', 'www.h2eni.github.io']);
+      return originHost === host || allowed.has(originHost);
     } catch {
       return false;
     }
@@ -215,10 +223,12 @@ function createApp({
   function dispatchApi(request, response, url) {
     const { method } = request;
     const segments = url.pathname.split('/').filter(Boolean);
+    response._requestOrigin = request.headers.origin && sameOrigin(request) ? request.headers.origin : '*';
 
     if (method === 'OPTIONS') {
       response.writeHead(204, {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': response._requestOrigin,
+        'Access-Control-Allow-Credentials': response._requestOrigin !== '*' ? 'true' : 'false',
         'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type'
       });

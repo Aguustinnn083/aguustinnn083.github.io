@@ -13,6 +13,18 @@ let currentRoute = 'home';
 let gameSearch = '';
 let userSearch = '';
 const basePath = location.pathname.replace(/(?:home|games|users)\/?$/, '') || '/';
+const retroGames = [
+  { name: 'Baseplate', genre: 'Building', alt: 'Baseplate building scene' },
+  { name: 'Drift Rush', genre: 'Racing', alt: 'Racing challenge' },
+  { name: 'Pixel Quest', genre: 'Adventure', alt: 'Adventure map' },
+  { name: 'Sky Arena', genre: 'Action', alt: 'Action arena' }
+];
+const apiBase = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? '' : (window.location.hostname.endsWith('.github.io') ? 'http://localhost:3000' : '');
+
+function resolveApiUrl(endpoint) {
+  if (!endpoint || /^https?:\/\//.test(endpoint)) return endpoint;
+  return `${apiBase}${endpoint}`;
+}
 
 function avatarMarkup(color = '#4684bf') {
   return `<span class="classic-avatar" aria-hidden="true"><i class="head"></i><i class="torso" style="background:${color};border-color:${color}"></i><i class="leg left"></i><i class="leg right"></i></span>`;
@@ -42,7 +54,12 @@ function userMarkup(user, index) {
 async function api(endpoint, options = {}) {
   const headers = new Headers(options.headers || {});
   if (options.body && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
-  const response = await fetch(endpoint, { ...options, headers, credentials: 'same-origin' });
+  const url = resolveApiUrl(endpoint);
+  const response = await fetch(url, {
+    ...options,
+    headers,
+    credentials: apiBase ? 'include' : 'same-origin'
+  });
   let data = {};
   try { data = await response.json(); } catch { /* Empty responses are allowed. */ }
   if (!response.ok) throw new Error(data.error || 'The request could not be completed.');
