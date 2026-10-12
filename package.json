@@ -1,0 +1,12 @@
+{
+  "name": "crafblox",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Crafblox social building app with real signup, login, and friend features.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test test/app.test.js"
+  }
+}
