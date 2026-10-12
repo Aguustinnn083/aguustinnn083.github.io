@@ -103,6 +103,8 @@ async function renderUsersPage() {
       : '<div class="classic-empty">No users found. Check the spelling and try again.</div>';
     document.querySelector('[data-user-results]').textContent = `${result.users.length} users`;
   } catch (cause) {
+    document.querySelector('[data-users-grid]').innerHTML = '<div class="classic-empty">The user list could not be refreshed.</div>';
+    document.querySelector('[data-user-results]').textContent = '0 users';
     setFeedback(cause.message, true);
   }
 }
@@ -164,6 +166,12 @@ function renderRequests() {
 
 async function refreshCommunity() {
   if (!currentUser) return;
+  friends = [];
+  incomingRequests = [];
+  outgoingRequests = [];
+  renderFriendCards();
+  renderRequests();
+  renderFriendSidebar().catch(() => {});
   try {
     const [friendResult, requestResult] = await Promise.all([api('/api/friends'), api('/api/friend-requests')]);
     friends = friendResult.friends;
@@ -173,6 +181,8 @@ async function refreshCommunity() {
     renderRequests();
     await Promise.all([renderUsersPage(), renderFriendSidebar()]);
   } catch (cause) {
+    renderFriendCards();
+    renderRequests();
     setFeedback(cause.message, true);
   }
 }
