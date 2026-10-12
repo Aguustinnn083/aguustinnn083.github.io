@@ -12,6 +12,20 @@ test('index.html should not contain the legacy fake-player mock data', () => {
   assert.match(html, /data-auth-form/, 'Live auth form should still exist.');
 });
 
+test('browser preflight OPTIONS requests are accepted without a 405', async () => {
+  const server = createApp({ dbPath: ':memory:' });
+  await new Promise((resolve) => server.listen(0, resolve));
+  const { port } = server.address();
+  const base = `http://127.0.0.1:${port}`;
+
+  try {
+    const res = await fetch(`${base}/api/health`, { method: 'OPTIONS' });
+    assert.equal(res.status, 204);
+  } finally {
+    await new Promise((resolve, reject) => server.close((err) => (err ? reject(err) : resolve())));
+  }
+});
+
 test('signup and friend-request flow work against the real server API', async () => {
   const server = createApp({ dbPath: ':memory:' });
   await new Promise((resolve) => server.listen(0, resolve));

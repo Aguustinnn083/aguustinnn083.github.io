@@ -216,6 +216,16 @@ function createApp({
     const { method } = request;
     const segments = url.pathname.split('/').filter(Boolean);
 
+    if (method === 'OPTIONS') {
+      response.writeHead(204, {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      });
+      response.end();
+      return;
+    }
+
     if (method !== 'GET' && !sameOrigin(request)) {
       error(response, 403, 'Cross-origin requests are not allowed.');
       return;
@@ -493,6 +503,15 @@ function createApp({
   }
 
   async function serveStatic(request, response, url) {
+    if (request.method === 'OPTIONS') {
+      response.writeHead(204, {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      });
+      response.end();
+      return;
+    }
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       error(response, 405, 'Method not allowed.');
       return;
