@@ -47,21 +47,21 @@
   <div class="classic-wrap classic-layout">
     <aside class="classic-left" aria-label="Account and site menu">
       <section class="classic-panel"><div class="classic-panel-heading">My Crafblox</div><div class="classic-panel-body classic-profile"><span class="classic-avatar" aria-hidden="true"><i class="head"></i><i class="torso"></i><i class="leg left"></i><i class="leg right"></i></span><div><strong>pixelpiper</strong><span>Welcome back!</span></div></div><nav class="classic-side-nav"><a href="/home/" data-retro-route="home"><span class="classic-side-icon">⌂</span>Home</a><a href="/games/" data-retro-route="games"><span class="classic-side-icon">▣</span>Games</a><a href="/users/" data-retro-route="users"><span class="classic-side-icon">♙</span>People</a></nav></section>
-      <section class="classic-panel"><div class="classic-panel-heading">Quick Links</div><div class="classic-side-nav"><a href="/games/" data-retro-route="games"><span class="classic-side-icon">★</span>Popular Games</a><a href="/users/" data-retro-route="users"><span class="classic-side-icon">♧</span>Find Friends</a></div></section>
+      <section class="classic-panel"><div class="classic-panel-heading">Quick Links</div><div class="classic-side-nav"><a href="/games/" data-retro-route="games"><span class="classic-side-icon">★</span>Play Baseplate</a><a href="/users/" data-retro-route="users"><span class="classic-side-icon">♧</span>Find Friends</a></div></section>
       <div class="classic-status"><i></i>All systems operational</div>
     </aside>
 
     <main class="classic-center">
       <section data-retro-page="home">
         <h1 class="classic-page-title">Welcome to <strong>Crafblox!</strong></h1>
-        <a class="classic-hero" href="/games/" data-retro-route="games" aria-label="Browse games"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1100&q=80" alt="A colorful video game setup"><span class="classic-hero-copy"><span class="classic-label">PLAY TOGETHER</span><h2>Your next adventure starts here</h2><p>Discover a new game and invite your friends along.</p></span></a>
-        <section class="classic-section"><h2 class="classic-section-title">Recommended For You <a href="/games/" data-retro-route="games">See All »</a></h2><div class="classic-games" data-home-games></div></section>
-        <section class="classic-section"><h2 class="classic-section-title">Popular Games <a href="/games/" data-retro-route="games">Browse All »</a></h2><div class="classic-games" data-home-popular></div></section>
+        <a class="classic-hero" href="/games/" data-retro-route="games" aria-label="Play Baseplate"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1100&q=80" alt="A colorful video game setup"><span class="classic-hero-copy"><span class="classic-label">ONE GAME. BIG PLANS.</span><h2>Baseplate. Make it yours.</h2><p>Start with a blank baseplate. Build whatever you can imagine.</p></span></a>
+        <section class="classic-section"><h2 class="classic-section-title">Featured Game</h2><div class="classic-games" data-home-games></div></section>
+        <section class="classic-section"><p class="classic-home-note">One world to build in. Bring your friends and make it your own.</p></section>
       </section>
 
       <section data-retro-page="games" hidden>
         <h1 class="classic-page-title"><strong>Games</strong></h1>
-        <div class="classic-game-controls"><div class="classic-tabs" aria-label="Filter by game category"><button type="button" class="classic-tab is-current" data-game-category="All">All Games</button><button type="button" class="classic-tab" data-game-category="Adventure">Adventure</button><button type="button" class="classic-tab" data-game-category="Roleplay">Roleplay</button><button type="button" class="classic-tab" data-game-category="Survival">Survival</button><button type="button" class="classic-tab" data-game-category="Obby">Obby</button><button type="button" class="classic-tab" data-game-category="Social">Social</button></div><label class="classic-sort">Sort by <select data-games-sort aria-label="Sort games"><option value="popular">Most Popular</option><option value="alphabetical">A to Z</option><option value="newest">Recently Updated</option></select></label></div>
+        <div class="classic-game-controls"><span>Welcome to Baseplate, the place to build anything.</span></div>
         <h2 class="classic-section-title"><span>All Games</span><span class="classic-muted-link" data-game-results></span></h2><div class="classic-games" data-games-grid></div>
       </section>
 
@@ -132,7 +132,7 @@
 <dialog class="play-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" aria-label="Close preview">×</button><div class="dialog-art" data-dialog-art></div><div class="dialog-copy"><span class="eyebrow">YOU'RE INVITED</span><h2 id="dialog-title">Ready to jump in?</h2><p data-dialog-description>Gather a friend. Bring your big ideas.</p><button class="button-dark dialog-play" type="button"><span class="play-triangle"></span> Let's play</button></div></dialog>
 <div class="toast" role="status" aria-live="polite"></div>
 
-<script>
+<script type="text/plain">
 const games=[
  {title:'Skybound Isles',category:'Adventure',players:842,icon:'✦',tone:'sky',badge:'CONTINUE',photo:'photo-1519608487953-e999c86e7455',alt:'Starry sky over a misty mountain lake'},
  {title:'Little Lanterns',category:'Social',players:326,icon:'◉',tone:'sunset',badge:'WITH FRIENDS',photo:'photo-1519681393784-d120267933ba',alt:'Snowy mountain underneath a bright night sky'},

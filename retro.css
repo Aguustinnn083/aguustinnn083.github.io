@@ -58,13 +58,14 @@ body > .toast { display: none !important; }
 .classic-hero-copy h2 { margin: 0 0 5px; font-size: 22px; text-shadow: 0 1px 3px #000; }
 .classic-hero-copy p { margin: 0; font-size: 11px; text-shadow: 0 1px 3px #000; }
 .classic-section { margin-top: 15px; }
+.classic-home-note { margin: 10px 0; color: #666; font-size: 12px; }
 .classic-section-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 9px; padding-bottom: 7px; border-bottom: 1px solid #cfd4d7; font-size: 15px; }
 .classic-section-title a { color: #167ac0; font-size: 11px; font-weight: 400; }
 .classic-games { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 .classic-game { min-width: 0; padding: 4px; border: 1px solid #d5d8da; background: #fff; }
 .classic-game:hover { border-color: #8dbbd8; background: #f6fbfe; }
 .classic-game-image { position: relative; display: block; overflow: hidden; aspect-ratio: 1.27; background: #c2cdd0; }
-.classic-game-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.classic-baseplate { background-color: #72ac60; background-image: radial-gradient(ellipse at center, #a4cb82 0 2px, transparent 3px), radial-gradient(ellipse at center, #548d49 0 2px, transparent 3px), linear-gradient(45deg, #78b265 25%, transparent 25%, transparent 75%, #78b265 75%), linear-gradient(45deg, #78b265 25%, transparent 25%, transparent 75%, #78b265 75%); background-position: 0 0, 10px 10px, 0 0, 10px 10px; background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px; }
 .classic-game-name { display: block; overflow: hidden; margin: 6px 1px 3px; color: #167ac0; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; font-weight: 700; }
 .classic-game-meta { display: flex; align-items: center; justify-content: space-between; gap: 3px; margin: 0 1px 2px; color: #858585; font-size: 9px; }
 .classic-online { color: #5b9b4a; white-space: nowrap; }
