@@ -177,8 +177,17 @@ async function refreshCommunity() {
   }
 }
 
+function persistUser(user) {
+  if (!user) {
+    window.localStorage.removeItem('crafblox_user');
+    return;
+  }
+  window.localStorage.setItem('crafblox_user', JSON.stringify(user));
+}
+
 function updateAccount(user) {
   currentUser = user;
+  persistUser(user);
   document.querySelector('[data-signed-out]').hidden = Boolean(user);
   document.querySelector('[data-signed-in]').hidden = !user;
   document.querySelector('[data-current-username]').textContent = user?.username || '';
@@ -269,6 +278,15 @@ async function initialize() {
     const result = await api('/api/me');
     updateAccount(result.user);
   } catch {
+    try {
+      const cached = JSON.parse(window.localStorage.getItem('crafblox_user') || 'null');
+      if (cached && cached.username) {
+        updateAccount(cached);
+        return;
+      }
+    } catch {
+      // Ignore invalid cached user state and fall back to signed-out.
+    }
     updateAccount(null);
   }
 }
@@ -304,6 +322,7 @@ document.addEventListener('click', async (event) => {
       updateAccount(null);
       setFeedback('You are signed out.');
     } catch (cause) {
+      updateAccount(null);
       setFeedback(cause.message, true);
     }
     return;
